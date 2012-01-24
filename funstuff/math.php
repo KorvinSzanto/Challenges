@@ -2,7 +2,7 @@
 <?php
 function divby0($in) { return 'ERROR'; }
 function divby1($in) { return 1; }
-function divby2($in) { return (pow(-1,2) == 1?1:0); }
+function divby2($in) { return (pow(-1,$in) == 1?1:0); }
 function divby3($in) {
 	$num = 0;
 	foreach(preg_split('//', $in, -1, PREG_SPLIT_NO_EMPTY) as $n) $num+=$n;
@@ -13,10 +13,8 @@ function divby4($in) { return (substr($in,-2)%4==0?1:0); }
 function divby5($in) { return (in_array(substr($in,-1),array(0,5))?1:0); }
 function divby6($in) { return (divby2($in)?(divby3($in)?1:0):0); }
 function divby7($in) {
-	$n = preg_split('//', $in, -1, PREG_SPLIT_NO_EMPTY);
-	$f = array_pop($n);
-	$num = 3 * implode('',$n) + $f;
-	if (strlen($num) > 1) return divby3($num);
+	$num = (3 * substr($in,0,strlen($in)-1)) + substr($in,-1);
+	if (strlen($num) > 1) return divby7($num);
 	else return ($num == 7)?1:0;
 }
 function divby8($in) { return (substr($in,-3)%8==0?1:0); }
@@ -26,10 +24,10 @@ function divby9($in) {
 	if (strlen($num) > 1) return divby3($num);
 	else return ($num == 9)?1:0;
 }
-function divby10($in) { return (substr($in,-1) == 0?1:0; }
+function divby10($in) { return (substr($in,-1) == 0?1:0); }
 
 
-$nu = 70000;
+$nu = $_GET['n'];
 echo "$nu\n_____\n0: ";
 echo divby0($nu);
 echo "\n1: ";
