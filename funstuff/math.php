@@ -1,4 +1,3 @@
-<pre>
 <?php
 function divby0($in) { return 'ERROR'; }
 function divby1($in) { return 1; }
