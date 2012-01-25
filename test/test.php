@@ -1,1 +1,1 @@
-Content
+<? echo "test"; ?>
